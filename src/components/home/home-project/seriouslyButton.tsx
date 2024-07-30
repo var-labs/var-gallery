@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const SeriouslyButton: React.FC = () => {
   const [isSwitched, setIsSwitched] = useState(false);
-  const [fillPercentage, setFillPercentage] = useState(0); // Start at 0%
+  const [fillPercentage, setFillPercentage] = useState(0);
   const buttonRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
@@ -65,7 +65,7 @@ const SeriouslyButton: React.FC = () => {
         Discover More.
       </h1>
       <div 
-        className="bg-[#101D1F] px-10 py-10 rounded-full mt-7 flex items-center cursor-hand hover:custom-cursor justify-center mx-auto w-[230px] h-[60px] relative"
+        className="bg-[#101D1F] px-10 py-10 rounded-full mt-7 flex items-center cursor-hand hover:custom-pointer justify-center mx-auto w-[230px] h-[60px] relative"
         ref={containerRef}
       >
         <div
@@ -74,7 +74,7 @@ const SeriouslyButton: React.FC = () => {
         ></div>
         <div
           ref={buttonRef}
-          className="absolute top-0 w-20 h-20 bg-[#AAC8CD] rounded-full cursor-pointer"
+          className="absolute top-0 w-20 h-20 bg-[#AAC8CD] rounded-full"
           style={{ left: '0px' }}
           onMouseDown={handleMouseDown}
         ></div>
@@ -82,9 +82,9 @@ const SeriouslyButton: React.FC = () => {
           <h1 className="text-xl pl-2 pr-4">{isSwitched ? "LET'S SEE!" : 'SERIOUSLY?'}</h1>
         </div>
         {isSwitched && (
-          <Link legacyBehavior href={"/projects"}>
-            <a title="serious" className="absolute inset-0"></a>
-          </Link>
+        <Link legacyBehavior href={"/projects"}>
+          <a title="serious" className="absolute inset-0 cursor-hand"></a>
+        </Link>
         )}
       </div>
     </div>

@@ -54,21 +54,31 @@ const projectData = [
   },
 ];
 
-const ProjectsList: React.FC = () => (
-  <div className="grid grid-cols-2 gap-8 px-[9rem] py-10 mb-[19rem]">
-    {projectData.map((project, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.4 }}
-        transition={{ duration: 0.6, delay: index * 0.1, type: "spring", stiffness: 100, damping: 20 }}
-        style={{ willChange: "transform, opacity" }}
-      >
-        <ProjectCard {...project} index={index} />
-      </motion.div>
-    ))}
-  </div>
-);
+const ProjectsList: React.FC = () => {
+  return (
+    <div className="grid grid-cols-2 gap-8 px-[9rem] py-10 mb-[19rem]">
+      {projectData.map((project, index) => (
+        <ProjectCard key={index} index={index} {...project} />
+      ))}
+    </div>
+  );
+};
+// const ProjectsList: React.FC = () => (
+//   <div className="grid grid-cols-2 gap-8 px-[9rem] py-10 mb-[19rem]">
+//     {projectData.map((project, index) => (
+//       <motion.div
+//         key={index}
+//         // initial={{ opacity: 0, y: 100 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         // viewport={{ once: false, amount: 0.4 }}
+//         transition={{ duration: 0.6, delay: index * 0.1 }}
+//         // style={{ willChange: "transform, opacity" }}
+//       >
+//         <ProjectCard {...project} index={index} />
+//       </motion.div>
+//     ))}
+//   </div>
+// );
+
 
 export default ProjectsList;

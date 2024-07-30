@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { GradientBackground } from "../home-background/gradientBackground";
+import { GradientBackground } from "../home-header/gradientBackground";
 import { AnimatedRoundedGradient } from "@/components/backgrounds/animated-rounded-gradient/AnimatedRoundedGradient";
 import ProjectHeader from "./projectHeader";
 import ProjectsList from "./projectList";
@@ -17,13 +17,13 @@ const Projects: React.FC = () => {
         <AnimatedRoundedGradient className="top-[calc(20%-var(--size)/2)] right-[calc(35%-var(--size))] animate-first" />
           <div className="bg-transparant">
             <div className="w-870 h-496 relative">
-            <GradientBackground className="relative z-20">
+            {/* <GradientBackground className="relative z-20"> */}
 
               <Image src={"/assets/test.png"} alt="smkpurwosari" width={870} height={496} className="object-cover" loading="lazy" />
-        </GradientBackground>
+        {/* </GradientBackground> */}
           
             </div>
-            <div className="w-full max-w-7xl mt-8 px-4">
+            <div className="w-full max-w-7xl mt-8 px-4 relative z-20">
               <div className="flex justify-between items-center px-2">
                 <div className="flex flex-col">
                   <h1 className="font-semibold text-3xl mb-8">SMK Negeri 1 Purwosari</h1>

@@ -5,6 +5,7 @@ import arrowUp from '../../../public/assets/arrow-up.svg';
 import logo1 from '../../../public/assets/var.svg';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useLoading } from '../loading/loadingContext';
 
 const functionNav = [
   {
@@ -26,18 +27,17 @@ const functionNav = [
 ];
 
 const Navbar = () => {
-  const [iconsIndex, seticonsIndex] = useState(1)
+  const [iconsIndex, setIconsIndex] = useState(1);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const pathname = usePathname()
-  console.log(pathname)
-
+  const pathname = usePathname();
+  const { isLoading } = useLoading();
 
   useEffect(() => {
     const controlNavbar = () => {
-       if (window.scrollY > 0) {
-        seticonsIndex(0);
+      if (window.scrollY > 0) {
+        setIconsIndex(0);
       } else {
-        seticonsIndex(1)
+        setIconsIndex(1);
       }
 
       setLastScrollY(window.scrollY);
@@ -50,10 +50,18 @@ const Navbar = () => {
     };
   }, [lastScrollY]);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (isLoading) {
+    return null; // Don't render Navbar until loading is done
+  }
+
   const Icons = [
-    <ArrowUpIcon key={0} />,
+    <ArrowUpIcon key={0} onClick={scrollToTop} />,
     <Link href={'/'} key={1}><ArrowLeftIcon /></Link>,
-  ]
+  ];
 
   return (
     <>
@@ -63,7 +71,7 @@ const Navbar = () => {
       <div className='fixed z-40 text-center bottom-0 container flex'>
         <div className='mx-auto bg-[#101D1F] my-10 text-white rounded-full max-w-full'>
           <nav className='inline-flex flex-row w-[430px] items-center py-[6px] px-[6px] gap-2'>
-            {pathname === '/' ? <ArrowUpIcon /> : Icons[iconsIndex]}
+            {pathname === '/' ? <ArrowUpIcon onClick={scrollToTop} /> : Icons[iconsIndex]}
             {functionNav.map((item, index) => (
               <LinkHoverAnimation key={index} text={item.nameText} href={item.id} />
             ))}
@@ -74,7 +82,11 @@ const Navbar = () => {
   );
 };
 
-const ArrowUpIcon = () => {
+type ArrowUpIconProps = {
+  onClick: () => void;
+};
+
+const ArrowUpIcon: React.FC<ArrowUpIconProps> = ({ onClick }) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseOver = () => {
@@ -93,6 +105,7 @@ const ArrowUpIcon = () => {
         className='bg-[#AAC8CD] w-[40px] h-[40px] m-1 rounded-full flex items-center justify-center'
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseLeave}
+        onClick={onClick} // Make sure onClick is correctly passed here
       >
         <div className='absolute inset-0 flex items-center justify-center'>
           <Image
@@ -139,7 +152,6 @@ const ArrowLeftIcon = () => {
     </div>
   );
 };
-
 
 type LinkHoverAnimationProps = {
   text: string;

@@ -92,6 +92,8 @@ const Members: React.FC = () => {
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+      
       if (isDragging.current && buttonRef.current && containerRef.current) {
         const containerRect = containerRef.current.getBoundingClientRect();
         const buttonRect = buttonRef.current.getBoundingClientRect();

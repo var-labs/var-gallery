@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { GradientBackground } from "../home-background/gradientBackground";
+import { GradientBackground } from "../home-header/gradientBackground";
 
 interface ProjectCardProps {
   title: string;
@@ -18,17 +18,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imgSrc, w
   <div className={`flex flex-col items-center ${index % 2 === 0 ? "self-start" : "self-end mt-36"}`}>
       <div className="bg-transparant">
         <div className={`relative w-${width} h-${height}`}>
-        <GradientBackground>
+        {/* <GradientBackground> */}
 
           <Image src={imgSrc} alt={title} width={width} height={height} className="object-cover" loading="lazy" />
-    </GradientBackground>
+    {/* </GradientBackground> */}
         
         </div>
         <div className="w-full max-w-7xl mt-8">
           <div className="flex justify-between items-center px-9">
             <div className="flex flex-col">
-              <h1 className="font-semibold text-[26px] mb-8">{title}</h1>
-              <p className="font-medium text-lg mb-4">{description}</p>
+              <h1 className="font-semibold text-[20px] mb-8">{title}</h1>
+              <p className="font-medium text-[14px] mb-4">{description}</p>
             </div>
             <div>
               <Link legacyBehavior href={link}>
