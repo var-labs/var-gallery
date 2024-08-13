@@ -8,31 +8,31 @@ reuleaux.register();
 const LoadingScreen: React.FC = () => {
   return (
     <div className="flex items-center justify-center h-screen w-full bg-[#020505]">
-      <l-reuleaux
-        size="37"
+      {/* <l-reuleaux
+        size="50"
         stroke="5"
         stroke-length="0.15"
         bg-opacity="0.1"
-        speed="1.2"
+        speed="1"
         color="white"
-      ></l-reuleaux>
+      ></l-reuleaux> */}
     </div>
   );
 };
 
 const ClientRootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { isLoading, setIsLoading } = useLoading();
+  // const { isLoading, setIsLoading } = useLoading();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [setIsLoading]);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 500);
+  //   return () => clearTimeout(timer);
+  // }, [setIsLoading]);
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  // if (isLoading) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <>

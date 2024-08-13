@@ -15,7 +15,7 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ link, onMouseEnter, onMouseLeave }) => {
   return (
     <div
-      className="w-[120px] h-[120px] relative group custom-cursor-hover"
+      className="w-[120px] h-[120px] relative group"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -31,7 +31,7 @@ const Avatar: React.FC<AvatarProps> = ({ link, onMouseEnter, onMouseLeave }) => 
         alt={`Avatar ${link.name} hover`}
         width={120}
         height={120}
-        className="object-cover transition-opacity duration-300 opacity-0 group-hover:opacity-100 absolute top-0 left-0"
+        className="object-cover transition-opacity duration-400 opacity-0 group-hover:opacity-100 absolute top-2 left-0"
       />
     </div>
   );

@@ -32,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imgSrc, w
             </div>
             <div>
               <Link legacyBehavior href={link}>
-                <a className="border px-9 py-2 rounded-full cursor-hand hover:bg-gray-400">Details</a>
+                <a className="border px-9 py-2 rounded-full hover:bg-gray-400">Details</a>
               </Link>
             </div>
           </div>

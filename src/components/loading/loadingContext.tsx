@@ -1,9 +1,7 @@
-// loadingContext.tsx
-
 "use client"
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the interface for the context's value
+
 interface LoadingContextProps {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;

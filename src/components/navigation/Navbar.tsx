@@ -6,24 +6,13 @@ import logo1 from '../../../public/assets/var.svg';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useLoading } from '../loading/loadingContext';
+import { Link as ScrollLink, animateScroll as scroll} from 'react-scroll';
 
 const functionNav = [
-  {
-    nameText: "Members",
-    id: '#members'
-  },
-  {
-    nameText: "Projects",
-    id: '/projects'
-  },
-  {
-    nameText: "Service",
-    id: '#service'
-  },
-  {
-    nameText: "Let's Talk",
-    id: '/contacts'
-  }
+  { nameText: "Members", id: 'members' },
+  { nameText: "Projects", id: 'projects' },
+  { nameText: "Service", id: 'service' },
+  { nameText: "Let's Talk", id: '/contacts' }
 ];
 
 const Navbar = () => {
@@ -54,9 +43,9 @@ const Navbar = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (isLoading) {
-    return null; // Don't render Navbar until loading is done
-  }
+  // if (isLoading) {
+  //   return null; 
+  // }
 
   const Icons = [
     <ArrowUpIcon key={0} onClick={scrollToTop} />,
@@ -66,15 +55,32 @@ const Navbar = () => {
   return (
     <>
       <div className="top-11 z-20 absolute flex justify-center w-full">
-        <Image src={logo1} width={150} alt="logo" />
+        { pathname !== '/contacts' && <Image src={logo1} width={150} alt="logo"/>
+        }
       </div>
       <div className='fixed z-40 text-center bottom-0 container flex'>
         <div className='mx-auto bg-[#101D1F] my-10 text-white rounded-full max-w-full'>
           <nav className='inline-flex flex-row w-[430px] items-center py-[6px] px-[6px] gap-2'>
+
             {pathname === '/' ? <ArrowUpIcon onClick={scrollToTop} /> : Icons[iconsIndex]}
-            {functionNav.map((item, index) => (
-              <LinkHoverAnimation key={index} text={item.nameText} href={item.id} />
-            ))}
+            {pathname !== '/' ? (
+              <LinkHoverAnimation text="Back to HomePage" href="/" />
+            ) : (
+              functionNav.map((item, index) => (
+                item.id.startsWith('/') ? (
+                  <LinkHoverAnimation key={index} text={item.nameText} href={item.id} />
+                ) : (
+                  <ScrollLink
+                    key={index}
+                    to={item.id}
+                    smooth={true}
+                    duration={500}
+                  >
+                    <LinkHoverAnimation text={item.nameText} href={`#/${item.id}`} />
+                  </ScrollLink>
+                )
+              ))
+            )}
           </nav>
         </div>
       </div>
@@ -105,7 +111,7 @@ const ArrowUpIcon: React.FC<ArrowUpIconProps> = ({ onClick }) => {
         className='bg-[#AAC8CD] w-[40px] h-[40px] m-1 rounded-full flex items-center justify-center'
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseLeave}
-        onClick={onClick} // Make sure onClick is correctly passed here
+        onClick={onClick} 
       >
         <div className='absolute inset-0 flex items-center justify-center'>
           <Image
@@ -119,6 +125,7 @@ const ArrowUpIcon: React.FC<ArrowUpIconProps> = ({ onClick }) => {
     </div>
   );
 };
+
 
 const ArrowLeftIcon = () => {
   const [hovered, setHovered] = useState(false);
@@ -176,16 +183,20 @@ const LinkHoverAnimation: React.FC<LinkHoverAnimationProps> = ({ text, href }) =
       onMouseEnter={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
+    <span
+      className={`absolute inset-0 rounded-2xl transition-all duration-300 ${hovered ? 'bg-[#AAC8CD] bg-opacity-45' : ''}`}
+    ></span>
+
       <span
-        className={`text-[16px] font-[500] whitespace-nowrap transition-transform duration-500 ${hovered ? 'transform -translate-y-[100px]' : ''}`}
-      >
-        {text}
-      </span>
+      className={`text-[16px] font-[500] whitespace-nowrap transition-transform duration-300 z-10 ${hovered ? 'transform -translate-y-[100px]' : ''}`}
+    >
+      {text}
+    </span>
       <span
-        className={`text-[16px] font-[500] whitespace-nowrap bg-[#AAC8CD] bg-opacity-45 rounded-2xl p-2 transition-transform duration-500 absolute top-full ${hovered ? 'transform -translate-y-[40px]' : ''}`}
-      >
-        {text}
-      </span>
+      className={`text-[16px] font-[500] whitespace-nowrap transition-transform duration-300 absolute top-full z-10 ${hovered ? 'transform -translate-y-[34px]' : ''}`}
+    >
+      {text}
+    </span>
     </a>
   );
 };

@@ -17,9 +17,9 @@ const AvatarTooltip: React.FC<AvatarTooltipProps> = ({ hovered, cursorPosition }
   return (
     <div
       className="fixed pointer-events-none z-50 flex items-center"
-      style={{ left: `${cursorPosition.x + 20}px`, top: `${cursorPosition.y + 15}px` }}
+      style={{ left: `${cursorPosition.x + 20}px`, top: `${cursorPosition.y + 20}px` }}
     >
-      <div className="bg-[#101D1F] text-white p-2 rounded">
+      <div className="bg-[#101D1F] text-white px-4 py-2 rounded-2xl rounded-tl-none">
         <p>{hovered.name} | {hovered.role}</p>
       </div>
     </div>

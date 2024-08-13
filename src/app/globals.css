@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+ .select-none {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 body {
     cursor: url('/assets/cursor1.svg'), auto;
     /* color: rgb(189, 242, 242); */
@@ -18,3 +23,4 @@ body {
   .cursor-hand {
     cursor: url('/assets/hand-pointer1.svg'), auto;
   }
+

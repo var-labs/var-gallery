@@ -3,7 +3,7 @@ import React from "react";
 const Service = () => {
   return (
     <>
-      <div className="text-white px-[9rem] text-start mb-56">
+      <div className="text-white px-[9rem] text-start mb-56" id="service">
         <p className="text-[46px] font-[500] mb-24">
             With our services, we ensure good <br /> management, easy communication, and <br />your satisfaction.
         </p>
