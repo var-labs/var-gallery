@@ -4,59 +4,69 @@ import Link from 'next/link';
 const SeriouslyButton: React.FC = () => {
   const [isSwitched, setIsSwitched] = useState(false);
   const [fillPercentage, setFillPercentage] = useState(0); // Start at 0%
+  const [prevLeft, setPrevLeft] = useState(0);
+  const [dragDistance, setDragDistance] = useState(0);
   const buttonRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+  const maxWidth = useRef(230); // Store the maximum width reached
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
-      if (isDragging.current && buttonRef.current && containerRef.current) {
-        const containerRect = containerRef.current.getBoundingClientRect();
-        const buttonRect = buttonRef.current.getBoundingClientRect();
-        let newLeft = event.clientX - containerRect.left - buttonRect.width / 2;
+    if(isDragging.current && buttonRef.current && containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+       const buttonRect = buttonRef.current.getBoundingClientRect();
+       const padding = 10;
 
-        if (newLeft < 0) {
-          newLeft = 0;
-        } else if (newLeft > containerRect.width - buttonRect.width) {
-          newLeft = containerRect.width - buttonRect.width;
-        }
+        let newleft = event.clientX - containerRect.left - buttonRect.width / 2;
 
-        const newFillPercentage = (newLeft / (containerRect.width - buttonRect.width)) * 100;
-        setFillPercentage(newFillPercentage);
-
-        buttonRef.current.style.left = `${newLeft}px`;
-      }
-    };
-
-    const handleMouseUp = () => {
-      if (isDragging.current && buttonRef.current && containerRef.current) {
-        const containerRect = containerRef.current.getBoundingClientRect();
-        const buttonRect = buttonRef.current.getBoundingClientRect();
-        if (buttonRect.left + buttonRect.width / 2 < containerRect.width / 2) {
-          buttonRef.current.style.left = '0px';
-          setFillPercentage(0);
-          setIsSwitched(false);
-        } else {
-          buttonRef.current.style.left = `${containerRect.width - buttonRect.width}px`;
-          setFillPercentage(100);
+        if(newleft < padding) {
+          newleft = padding;
+        } else if (newleft > containerRect.width - buttonRef.current.offsetWidth - padding) {
+          newleft = containerRect.width - buttonRef.current.offsetWidth - padding;
           setIsSwitched(true);
+        } else {
+          setIsSwitched(false);
         }
-        isDragging.current = false;
-      }
-    };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
+        setDragDistance(newleft - prevLeft);
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
+        const isDraggingLeft = newleft < prevLeft;
 
+        let newWidth = Math.max(maxWidth.current, 16 + (newleft / containerRect.width) * 100);
+        const newHeight = Math.max(64, 16 - (newleft / containerRect.width) * 8);
+
+        if(newWidth > maxWidth.current) {
+          maxWidth.current = newWidth;
+        } else if (isDraggingLeft) {
+          maxWidth.current = Math.max(16, maxWidth.current - 5);
+          newWidth = maxWidth.current;
+        }
+
+        buttonRef.current.style.width = `${newWidth}px`;
+        buttonRef.current.style.height = `${newHeight}px`;
+        buttonRef.current.style.left = `${newleft}px`;
+        buttonRef.current.style.top = `${(containerRect.height - newHeight) / 2}px`;
+
+        setPrevLeft(newleft);
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
+  return () => {
+    window.removeEventListener('mousemove', handleMouseMove);
+    window.removeEventListener('mouseupm', handleMouseUp);
+  };
+}, [prevLeft]);
+  
   const handleMouseDown = () => {
     isDragging.current = true;
-  };
+  }
 
   return (
     <div className="text-center relative z-30">
@@ -69,23 +79,24 @@ const SeriouslyButton: React.FC = () => {
         ref={containerRef}
       >
         <div
-          className="absolute top-0 left-0 h-full bg-[#AAC8CD] rounded-full"
-          style={{ width: `${fillPercentage}%` }}
-        ></div>
-        <div
           ref={buttonRef}
-          className="absolute top-0 w-20 h-20 bg-[#AAC8CD] rounded-full cursor-pointer"
-          style={{ left: '0px' }}
+          className="absolute h-16 w-16 bg-[#AAC8CD] rounded-full cursor-pointer"
+          style={{ left: '10px', top: '10px' }}
           onMouseDown={handleMouseDown}
+          id='sliderButton'
         ></div>
         <div className="flex items-center z-10">
-          <h1 className="text-xl pl-2 pr-4">{isSwitched ? "LET'S SEE!" : 'SERIOUSLY?'}</h1>
-        </div>
-        {isSwitched && (
+          {/* <h1 className="text-xl pl-2 pr-4">{isSwitched ? "LET'S SEE!" : 'SERIOUSLY?'}</h1> */}
+        {isSwitched ? (
           <Link legacyBehavior href={"/projects"}>
-            <a title="serious" className="absolute inset-0"></a>
+            <h1 className='text-white'>APPLY NOW!</h1>
           </Link>
+        ) : (
+          <div>
+            <h1 className='text-white'>SERIOUSLY?</h1>
+          </div>
         )}
+        </div>
       </div>
     </div>
   );

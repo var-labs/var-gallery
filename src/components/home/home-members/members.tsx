@@ -81,60 +81,77 @@ const avatarLinks = [
   },
 ];
 
+
 const Members: React.FC = () => {
   const [hovered, setHovered] = useState<{ name: string; role: string } | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isSwitched, setIsSwitched] = useState(false);
-  const [fillPercentage, setFillPercentage] = useState(0); // Start at 0%
+  const [dragDistance, setDragDistance] = useState(0);
+  const [prevLeft, setPrevLeft] = useState(0);
   const buttonRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
-
+  const maxWidth = useRef(235); // Store the maximum width reached
+  
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
+      setCursorPosition({ x: event.clientX, y: event.clientY });
+    
       if (isDragging.current && buttonRef.current && containerRef.current) {
         const containerRect = containerRef.current.getBoundingClientRect();
         const buttonRect = buttonRef.current.getBoundingClientRect();
+        const padding = 10; // Padding inside the container
         let newLeft = event.clientX - containerRect.left - buttonRect.width / 2;
-
-        if (newLeft < 0) {
-          newLeft = 0;
-        } else if (newLeft > containerRect.width - buttonRect.width) {
-          newLeft = containerRect.width - buttonRect.width;
-        }
-
-        const newFillPercentage = (newLeft / (containerRect.width - buttonRect.width)) * 100;
-        setFillPercentage(newFillPercentage);
-
-        buttonRef.current.style.left = `${newLeft}px`;
-      }
-    };
-
-    const handleMouseUp = () => {
-      if (isDragging.current && buttonRef.current && containerRef.current) {
-        const containerRect = containerRef.current.getBoundingClientRect();
-        const buttonRect = buttonRef.current.getBoundingClientRect();
-        if (buttonRect.left + buttonRect.width / 2 < containerRect.width / 2) {
-          buttonRef.current.style.left = '0px';
-          setFillPercentage(0);
-          setIsSwitched(false);
+    
+        if (newLeft < padding) {
+          newLeft = padding;
+        } else if (newLeft > containerRect.width - buttonRef.current.offsetWidth - padding) {
+          newLeft = containerRect.width - buttonRef.current.offsetWidth - padding;
+          setIsSwitched(true); // Change text when slider reaches the right end
         } else {
-          buttonRef.current.style.left = `${containerRect.width - buttonRect.width}px`;
-          setFillPercentage(100);
-          setIsSwitched(true);
+          setIsSwitched(false);
         }
-        isDragging.current = false;
+    
+        setDragDistance(newLeft - padding);
+    
+        // Determine drag direction
+        const isDraggingLeft = newLeft < prevLeft;
+    
+        // Adjust the width and height of the slider button for stretching effect
+        let newWidth = Math.max(maxWidth.current, 16 + (newLeft / containerRect.width) * 100); // Max width of 116px
+        const newHeight = Math.max(64, 16 - (newLeft / containerRect.width) * 8); // Min height of 8px
+    
+        // Update the maximum width reached
+        if (newWidth > maxWidth.current) {
+          maxWidth.current = newWidth;
+        } else if (isDraggingLeft) {
+          // Gradually decrease maxWidth when dragging left
+          maxWidth.current = Math.max(16, maxWidth.current - 5); // Increase the decrement value to 5
+          newWidth = maxWidth.current;
+        }
+    
+        buttonRef.current.style.width = `${newWidth}px`;
+        buttonRef.current.style.height = `${newHeight}px`;
+        buttonRef.current.style.left = `${newLeft}px`;
+        buttonRef.current.style.top = `${(containerRect.height - newHeight) / 2}px`; // Center vertically
+    
+        // Update previous left value
+        setPrevLeft(newLeft);
       }
     };
-
+  
+    const handleMouseUp = () => {
+      isDragging.current = false;
+    };
+  
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
-
+  
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, []);
+  }, [prevLeft]);
 
   const handleMouseDown = () => {
     isDragging.current = true;
@@ -142,58 +159,59 @@ const Members: React.FC = () => {
 
   return (
     <>
-    <div className="px-36 text-start">
-      <div className="text-4xl text-white">
-        <p className="font-medium mb-10">
-          <span className="font-bold underline underline-offset-8 decoration-white">With determination and hope</span>, we
-          rise, <br /> leaving past flaws behind for a better <span className="italic">future</span>.
-        </p>
-        <p className="font-medium ml-24">
-          We are here to help you achieve your <span className="font-bold underline underline-offset-8 decoration-white">dreams</span> <br />
-          and <span className="font-bold underline underline-offset-8 decoration-white">aspirations</span> through
-          outstanding <span className="italic">design</span> <br /> and functionality.
-        </p>
+      <div className="px-36 text-start">
+        <div className="text-4xl text-white">
+          <p className="font-medium mb-10">
+            <span className="font-bold underline underline-offset-8 decoration-white">With determination and hope</span>, we
+            rise, <br /> leaving past flaws behind for a better <span className="italic">future</span>.
+          </p>
+          <p className="font-medium ml-24">
+            We are here to help you achieve your <span className="font-bold underline underline-offset-8 decoration-white">dreams</span> <br />
+            and <span className="font-bold underline underline-offset-8 decoration-white">aspirations</span> through
+            outstanding <span className="italic">design</span> <br /> and functionality.
+          </p>
+        </div>
       </div>
-    </div>
-  
-    <div className="flex flex-col items-center justify-center mt-10 pb-20">
-      <div className="grid grid-cols-6 gap-x-10 gap-y-12 mb-10">
-        {avatarLinks.map((link, index) => (
-          <Avatar
-            key={index}
-            link={link}
-            onMouseEnter={() => setHovered({ name: link.name, role: link.role })}
-            onMouseLeave={() => setHovered(null)}
-          />
-        ))}
-        <div className="col-span-2 col-start-1 flex justify-center mt-10 text-white">
-          <div
-            ref={containerRef}
-            className="relative w-64 h-20 bg-[#101D1F] rounded-full overflow-hidden flex items-center justify-center"
-          >
+
+      <div className="flex flex-col items-center justify-center mt-10 pb-20">
+        <div className="grid grid-cols-6 gap-x-10 gap-y-12 mb-10">
+          {avatarLinks.map((link, index) => (
+            <Avatar
+              key={index}
+              link={link}
+              onMouseEnter={() => setHovered({ name: link.name, role: link.role })}
+              onMouseLeave={() => setHovered(null)}
+            />
+          ))}
+          <div className="col-span-2 col-start-1 flex justify-center mt-10 text-white">
             <div
-              className="absolute top-0 left-0 h-full bg-[#AAC8CD] rounded-full"
-              style={{ width: `${fillPercentage}%` }}
-              id="fillBackground"
-            ></div>
-            <div
-              ref={buttonRef}
-              className="absolute top-0 w-20 h-20 bg-[#AAC8CD] rounded-full cursor-pointer"
-              style={{ left: '0px' }}
-              onMouseDown={handleMouseDown}
-              id="sliderButton"
-            ></div>
-            <div className="absolute w-full text-center">
-              <Link href={"/contacts"}>
-                <h1 className="text-white">{isSwitched ? 'APPLY NOW!' : 'JOIN US?'}</h1>
-              </Link>
+              ref={containerRef}
+              className="relative w-64 h-20 bg-[#101D1F] rounded-full overflow-hidden flex items-center justify-center"
+            >
+              <div
+                ref={buttonRef}
+                className="absolute h-16 w-16 bg-[#AAC8CD] rounded-full cursor-pointer transition-all duration-100 ease-out"
+                style={{ left: '10px', top: '10px' }} // Initial position
+                onMouseDown={handleMouseDown}
+                id="sliderButton"
+              ></div>
+              <div className="absolute w-full text-center">
+                {isSwitched ? (
+                  <Link href={"/contacts"}>
+                    <h1 className="text-white">APPLY NOW!</h1>
+                  </Link>
+                ) : (
+                  <div>
+                    <h1 className="text-white">JOIN US?</h1>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
+        <AvatarTooltip hovered={hovered} cursorPosition={cursorPosition} />
       </div>
-      <AvatarTooltip hovered={hovered} cursorPosition={cursorPosition} />
-    </div>
-  </>
+    </>
   );
 };
 
