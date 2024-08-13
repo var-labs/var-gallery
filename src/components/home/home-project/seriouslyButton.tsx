@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const SeriouslyButton: React.FC = () => {
+<<<<<<< HEAD
   const [isSwitched, setIsSwitched] = useState(false);
   const [fillPercentage, setFillPercentage] = useState(0); // Start at 0%
   const [prevLeft, setPrevLeft] = useState(0);
@@ -68,12 +69,15 @@ const SeriouslyButton: React.FC = () => {
     isDragging.current = true;
   }
 
+=======
+>>>>>>> parent of deee59d (feat: fixing slide bar)
   return (
     <div className="text-center relative z-30">
       <h1 className="font-bold text-[54px]">
         Our Creations <span className="underline underline-offset-[12px] opacity-[80%]">Go Beyond That!</span> <br />
         Discover More.
       </h1>
+<<<<<<< HEAD
       <div 
         className="bg-[#101D1F] px-10 py-10 rounded-full mt-7 flex items-center cursor-hand hover:custom-cursor justify-center mx-auto w-[230px] h-[60px] relative"
         ref={containerRef}
@@ -97,6 +101,14 @@ const SeriouslyButton: React.FC = () => {
           </div>
         )}
         </div>
+=======
+      <div className='mt-7 '>
+        <SliderButton 
+          initialText='SERIOUSLY'
+          switchedText='LET`S SEE!'
+          link='/projects'
+        />
+>>>>>>> parent of deee59d (feat: fixing slide bar)
       </div>
     </div>
   );
