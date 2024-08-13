@@ -84,7 +84,6 @@ const avatarLinks = [
 const Members: React.FC = () => {
   const [hovered, setHovered] = useState<{ name: string; role: string } | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-<<<<<<< HEAD
   const [isSwitched, setIsSwitched] = useState(false);
   const [dragDistance, setDragDistance] = useState(0);
   const [prevLeft, setPrevLeft] = useState(0);
@@ -147,16 +146,6 @@ const Members: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
   
-=======
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setCursorPosition({ x: event.clientX, y: event.clientY });
-    }
-
-    window.addEventListener('mousemove', handleMouseMove);
-
->>>>>>> parent of deee59d (feat: fixing slide bar)
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -169,7 +158,6 @@ const Members: React.FC = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <div className="px-36 text-start">
         <div className="text-4xl text-white">
           <p className="font-medium mb-10">
@@ -223,44 +211,6 @@ const Members: React.FC = () => {
         <AvatarTooltip hovered={hovered} cursorPosition={cursorPosition} />
       </div>
     </>
-=======
-    <div className="flex flex-col px-36 text-start select-none" id="members">
-       <div className="text-4xl text-white max-w-1/2">
-        <p className="font-medium mb-10 leading-normal">
-          <span className="font-bold underline underline-offset-8 decoration-white">With determination and hope</span>, we
-          rise, <br /> leaving past flaws behind for a better <span className="italic">future</span>.
-        </p>
-      </div>
-      <div className="text-4xl text-white max-w-1/2 ml-auto">
-        <p className="font-medium leading-normal text-end">
-          We are here to help you achieve your <span className="font-bold underline underline-offset-8 decoration-white">dreams</span> <br />
-          and <span className="font-bold underline underline-offset-8 decoration-white">aspirations</span> through
-          outstanding <span className="italic">design</span> <br /> and functionality.
-        </p>
-       </div>
-    </div>
-
-    <div className="flex flex-col items-center justify-center mt-[7rem] pb-20">
-      <div className="grid grid-cols-6 gap-x-10 gap-y-12 mb-10">
-        {avatarLinks.map((link, index) => (
-          <Avatar
-            key={index}
-            link={link}
-            onMouseEnter={() => setHovered({ name: link.name, role: link.role })}
-            onMouseLeave={() => setHovered(null)}
-          />
-        ))}
-        <div className="col-span-2 col-start-5 flex justify-center mt-10 text-white">
-          <SliderButton 
-            initialText="JOIN US?" 
-            switchedText="APPLY NOW!" 
-            link="/contacts" />
-        </div>
-      </div>
-      <AvatarTooltip hovered={hovered} cursorPosition={cursorPosition} />
-    </div>
-  </>
->>>>>>> parent of deee59d (feat: fixing slide bar)
   );
 };
 
