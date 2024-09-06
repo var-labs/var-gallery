@@ -72,7 +72,7 @@ const SliderButton: React.FC<SliderButtonProps> = ({ initialText, switchedText, 
   return (
     <div
       ref={containerRef}
-      className="relative w-64 h-20 bg-[#101D1F] rounded-full overflow-hidden flex items-center justify-center"
+      className="relative w-64 h-22 bg-[#101D1F] rounded-full overflow-hidden flex items-center justify-center"
       onMouseDown={handleMouseDown}
     >
       <div

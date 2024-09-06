@@ -11,25 +11,20 @@ const bungee = Bungee({
 const Footer = () => {
   return (
     <>
-        <div className='text-white'>
-          <div className={`bg-[url('/assets/overlay.png')] bg-[length:auto_480px]`}>
-            <h1 className={`text-center text-[80px] font-[400] ${bungee.className}`}>Creating sleek, <br />functional interfaces <br />for your ideas.</h1>
-            <div className='text-[16px] font-medium text-center mt-20 mb-[7rem] '>
+        <div className='relative text-white pt-10'>
+
+        <div className='absolute inset-0 bg-[url("/assets/overlay.png")] bg-center bg-no-repeat bg-[size:100%] mt-48'></div>
+
+          <div className={`pb-52`}>
+            <h1 className={`text-center text-[96px] font-[400] ${bungee.className} leading-none`}>Creating sleek, <br />functional interfaces <br />for your <span className='bg-[#548187] rounded-3xl px-2 py-0.5 inline-block'>ideas</span>.</h1>
+          
+            <div className='text-[16px] font-medium text-center mt-20 '>
                 <a href="https://github.com/var-labs" title='Github' target='blank' className='mx-16'>Github</a>
                 <a href="" title='Instagram' target='blank' className='mx-16'>Instagram</a>
                 <a href="" title='Dribbble' target='blank' className='mx-16'>Dribbble</a>
                 <a href="" title='Behance' target='blank' className='mx-16'>Behance</a>
                 <a href="" title='Medium' target='blank' className='mx-16'>Medium</a>
             </div>
-            </div>
-            <div>
-              <Image
-                src={"/assets/house.png"}
-                alt='footer image'
-                width={1440}
-                height={100}
-                className='max-h-full h-[100%] w-full'
-              />
             </div>
         </div>
     </>

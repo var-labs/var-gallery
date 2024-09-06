@@ -52,7 +52,6 @@ export const AnimatedRoundedGradient = ({
             "absolute [background:radial-gradient(circle_at_center,_rgba(var(--primary-color),_0.8)_0,_rgba(var(--secondary-color),_0)_50%,_rgba(var(--tertiary-color),_0)_100%)_no-repeat] w-[var(--size)] h-[var(--size)] opacity-100",
             className
           )}
-          
         ></div>
       </div>
     </>

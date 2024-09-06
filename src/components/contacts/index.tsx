@@ -36,7 +36,7 @@ const ContactsPage: React.FC = () => {
 
   return (
     <>
-        <div className='text-[#FFF] min-h-screen flex flex-col justify-center items-center -mt-11'>
+        <div className='text-[#FFF] min-h-screen flex flex-col justify-center items-center'>
             <div className={`text-center font-[400] text-[72px] leading-none ${bungee.className}`}>
                 <p className='mb-2'>Lets <span className='bg-[#548187] rounded-3xl'>hear</span> your</p>
                 <p>suggestions and</p>  
@@ -62,7 +62,7 @@ const ContactsPage: React.FC = () => {
               </div>
               <div className="flex justify-between w-full items-start mt-8">
                 <div className="flex flex-col w-3/4">
-                  <label htmlFor="description" className='text-[#FFFFFF] text-[40px] font-[600]'>What is it that you wish to express?</label>
+                  <label htmlFor="message" className='text-[#FFFFFF] text-[40px] font-[600]'>What is it that you wish to express?</label>
                   <div className="relative w-full mt-2">
                     <input type="text" name="message" id="message" placeholder='Send us your suggestions and feedback, or discuss your project.' className='placeholder:text-[#FFFFFF80] text-white text-[28px] font-[500] bg-transparent mb-12 w-full border-none focus:outline-none'/>
                     <div className="absolute bottom-0 left-0 w-full border-b-2 border-[#FFFFFF80]"></div>

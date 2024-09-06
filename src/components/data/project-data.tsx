@@ -5,6 +5,7 @@ const projectData = [
       imgSrc: "/assets/projects/andranoviax.png",
       width: 608,
       height: 399,
+      link: '',
     },
     {
       title: "Bukwush - Discover Book Series",
@@ -12,6 +13,7 @@ const projectData = [
       imgSrc: "/assets/projects/aldo.png",
       width: 508,
       height: 381,
+      link: '',
     },
     {
         title: "SMK Negeri 1 Purwosari",
@@ -19,6 +21,7 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 608,
         height: 399,
+        link: '',
       },
       {
         title: "Project 1",
@@ -26,6 +29,7 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 508,
         height: 381,
+        link: '',
       },
       {
         title: "SMK Negeri 1 Purwosari",
@@ -33,6 +37,7 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 608,
         height: 399,
+        link: '',
       },
       {
         title: "Project 1",
@@ -40,6 +45,7 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 508,
         height: 381,
+        link: '',
       },
       {
         title: "SMK Negeri 1 Purwosari",
@@ -47,6 +53,7 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 608,
         height: 399,
+        link: '',
       },
       {
         title: "Project 1",
@@ -54,7 +61,8 @@ const projectData = [
         imgSrc: "/assets/test.png",
         width: 508,
         height: 381,
+        link: '',
       },
   ];
 
-  
+export default projectData

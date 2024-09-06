@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import Avatar from "./avatars";
 import AvatarTooltip from "./avatarTooltip";
 import SliderButton from "@/components/sliders/sliderButton";
+import TextRevealByWord from "@/components/animations/magicui/text-reveal";
+TextRevealByWord
 
 const avatarLinks = [
   {
@@ -86,7 +88,7 @@ const Members: React.FC = () => {
   return (
     <>
     <div className="flex flex-col px-36 text-start select-none" id="members">
-       <div className="text-4xl text-white max-w-1/2">
+      <div className="text-4xl text-white max-w-1/2">
         <p className="font-medium mb-10 leading-normal">
           <span className="font-bold underline underline-offset-8 decoration-white">With determination and hope</span>, we
           rise, <br /> leaving past flaws behind for a better <span className="italic">future</span>.
@@ -98,11 +100,11 @@ const Members: React.FC = () => {
           and <span className="font-bold underline underline-offset-8 decoration-white">aspirations</span> through
           outstanding <span className="italic">design</span> <br /> and functionality.
         </p>
-       </div>
+      </div>
     </div>
 
-    <div className="flex flex-col items-center justify-center mt-[7rem] pb-20">
-      <div className="grid grid-cols-6 gap-x-10 gap-y-12 mb-10">
+    <div className="flex flex-col items-center justify-center mt-[3rem] py-6">
+      <div className="grid grid-cols-6 gap-x-12 gap-y-20 mb-10">
         {avatarLinks.map((link, index) => (
           <Avatar
             key={index}

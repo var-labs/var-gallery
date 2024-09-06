@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, } from "next/font/google";
 import { LoadingProvider } from "@/components/loading/loadingContext";
+// import { LoadingProvider } from "@/components/loading/loadingContext";
 import dynamic from "next/dynamic";
 import "./globals.css";
 
@@ -27,9 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-[#020505] ${plusJakarta.className} custom-cursor`}>
-        <LoadingProvider>
+        <div>
+          <LoadingProvider>
           <ClientRootLayout>{children}</ClientRootLayout>
-        </LoadingProvider>
+          </LoadingProvider>
+        </div>
       </body>
     </html>
   );

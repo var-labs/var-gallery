@@ -2,57 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "./projectCard";
-
-const projectData = [
-  {
-    title: "Andranoviax - Personal Portfolio",
-    description: "Website | Branding",
-    imgSrc: "/assets/projects/andranoviax.png",
-    // width: 608,
-    // height: 399,
-    link: "",
-  },
-  {
-    title: "Bukwush - Discover Book Series",
-    description: "Mobile app | UI - UX",
-    imgSrc: "/assets/projects/aldo.png",
-    // width: 589,
-    // height: 381,
-    link: "",
-  },
-  {
-    title: "Project 2",
-    description: "Website | School",
-    imgSrc: "/assets/test.png",
-    // width: 508,
-    // height: 381,
-    link: "",
-  },
-  {
-    title: "Project 3",
-    description: "Website | School",
-    imgSrc: "/assets/test.png",
-    // width: 608,
-    // height: 399,
-    link: "",
-  },
-  {
-    title: "Project 4",
-    description: "Website | School",
-    imgSrc: "/assets/test.png",
-    // width: 608,
-    // height: 399,
-    link: "",
-  },
-  {
-    title: "Project 5",
-    description: "Website | School",
-    imgSrc: "/assets/test.png",
-    // width: 508,
-    // height: 381,
-    link: "",
-  },
-];
+import projectData from "@/components/data/project-data";
 
 const shuffleArray = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -63,22 +13,49 @@ const shuffleArray = (array: any[]) => {
 };
 
 const ProjectsList: React.FC = () => {
-
+  
   const shuffledProjects = shuffleArray([...projectData]);
 
+  const leftColumn: any[] = [];
+  const rightColumn: any[] = [];
+
+  const projects608 = shuffledProjects.filter(project => project.width === 608);
+  const projects508 = shuffledProjects.filter(project => project.width === 508);
+
+  
+  for (let i = 0; i < 3; i++) {
+    if (projects608[i]) {
+      leftColumn.push(projects608[i]); 
+    }
+    if (projects508[i]) {
+      rightColumn.push(projects508[i]); 
+    }
+    if (projects508[i + 3]) {
+      leftColumn.push(projects508[i + 3]); 
+    }
+    if (projects608[i + 3]) {
+      rightColumn.push(projects608[i + 3]); 
+    }
+  }
+
+  
+  const displayedProjects = leftColumn.map((project, index) => {
+    return [project, rightColumn[index]];
+  }).flat().slice(0, 6);
+
+
   return (
-    <div className="grid grid-cols-2 gap-8 px-[9rem] py-10 mb-[19rem]">
-      {shuffledProjects.map((project, index) => {
-        
+    <div className="relative">
+    <div className="px-[9rem] py-10 mb-[19rem] grid grid-cols-2 gap-8">
+    
+      {displayedProjects.map((project, index) => {
         const isLeft = index % 2 === 0;
         const size = isLeft ? (index % 4 === 0 ? 608 : 508) : (index % 4 === 1 ? 508 : 608);
-
         const modifiedProject = {
           ...project,
           width: size,
           height: 399, 
         };
-
         return (
           <motion.div
             key={index}
@@ -90,8 +67,10 @@ const ProjectsList: React.FC = () => {
         );
       })}
     </div>
+    </div>
   );
 };
+export default ProjectsList;
 // const ProjectsList: React.FC = () => (
 //   <div className="grid grid-cols-2 gap-8 px-[9rem] py-10 mb-[19rem]">
 //     {projectData.map((project, index) => (
@@ -108,6 +87,3 @@ const ProjectsList: React.FC = () => {
 //     ))}
 //   </div>
 // );
-
-
-export default ProjectsList;

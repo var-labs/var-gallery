@@ -9,8 +9,6 @@ interface WordFadeInProps {
   className?: string;
   delay?: number;
   globalDelay?: number;
-  backgroundDelay?: number;
-  animateBackground?: boolean;
   variants?: Variants;
 }
 
@@ -18,14 +16,15 @@ export default function WordFadeIn({
   words,
   delay = 0.5,
   globalDelay = 0,
-  backgroundDelay = 0,
-  animateBackground = false,
   variants = {
-    hidden: { opacity: 0, y:20 },
+    hidden: { opacity: 0, y:-20 },
     visible: (i: number) => ({
       y: 0,
       opacity: 1,
-      transition: { delay: globalDelay + i * delay },
+      transition: { delay: globalDelay + i * delay,
+        type: "spring",
+        stiffness: 50
+       },
     }),
   },
   className,

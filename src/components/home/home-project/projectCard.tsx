@@ -18,10 +18,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imgSrc, w
   <div className={`flex flex-col items-center ${index % 2 === 0 ? "self-start" : "self-end mt-36"}`}>
       <div className="bg-transparant">
         <div className={`relative w-${width} h-${height}`}>
-        {/* <GradientBackground> */}
+        <GradientBackground/>
 
           <Image src={imgSrc} alt={title} width={width} height={height} className="object-cover" loading="lazy" />
-    {/* </GradientBackground> */}
+    <GradientBackground/>
         
         </div>
         <div className="w-full max-w-7xl mt-8">

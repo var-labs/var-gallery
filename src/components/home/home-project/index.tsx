@@ -2,8 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { GradientBackground } from "../home-header/gradientBackground";
 import { AnimatedRoundedGradient } from "@/components/backgrounds/animated-rounded-gradient/AnimatedRoundedGradient";
+import { CircleBackground } from "@/components/backgrounds/animated-rounded-gradient/Gradient-animation-circle";
 import ProjectHeader from "./projectHeader";
 import ProjectsList from "./projectList";
 import SeriouslyButton from "./seriouslyButton";
@@ -42,8 +42,9 @@ const Projects: React.FC = () => {
       </div>
       <ProjectsList />
       {/* <div className="relative z-20"> */}
-      <AnimatedRoundedGradient className="top-[calc(10%-var(--size)/2)] right-[calc(90%-var(--size))] animate-second w-[40%]" />
-      <AnimatedRoundedGradient className="top-[calc(20%-var(--size)/2)] left-[calc(90%-var(--size))] animate-second w-[50%]" />
+      <AnimatedRoundedGradient className="top-[calc(10%-var(--size)/2)] right-[calc(95%-var(--size))] animate-second w-[40%]" />
+      <AnimatedRoundedGradient className="top-[calc(20%-var(--size)/2)] left-[calc(95%-var(--size))] animate-second w-[50%]" />
+      {/* <CircleBackground/> */}
       {/* </div> */}
       <SeriouslyButton />
     </div>

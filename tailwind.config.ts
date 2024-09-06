@@ -3,8 +3,6 @@ const svgToDataUri = require("mini-svg-data-uri");
 const colors = require("tailwindcss/colors");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette").default;
 
-
-
 module.exports = {
   content: [
     "./src/**/*.{ts,tsx}",
@@ -15,20 +13,43 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      animation: {
-        first: "moveOne 30s ease infinite",
-        second: "moveTwo 20s reverse infinite",
-      },
       keyframes: {
-        moveTwo: {
+        moveHorizontal: {
           "0%": {
-            transform: "translateY(-4%) rotate(0deg)",
+            transform: "translateX(-50%) translateY(-10%)",
           },
           "50%": {
-            transform: "translateY(10%) rotate(40deg)",
+            transform: "translateX(50%) translateY(10%)",
           },
           "100%": {
-            transform: "translateY(-10%) rotate(20deg)",
+            transform: "translateX(-50%) translateY(-10%)",
+          },
+        },
+        moveInCircle: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "50%": {
+            transform: "rotate(180deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
+        moveTwo: {
+          "0%": {
+            transform: "translateX(0) rotate(0deg)",
+          },
+          "50%": {
+            transform: "translateX(10%) rotate(40deg)",
+          },
+          "100%": {
+            transform: "translateX(0) rotate(20deg)",
           },
         },
         moveOne: {
@@ -39,18 +60,24 @@ module.exports = {
             transform: "translateY(20%)",
           },
           "100%": {
-            transform: "translateY(-20%)",
+            transform: "translateY(-10%)",
           },
         },
+        shineEffect: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
+      },
+      animation: {
+        first: "moveOne 30s ease infinite",
+        second: "moveTwo 20s reverse infinite",
+        third: "moveInCircle 40s linear infinite",
+        fourth: "moveHorizontal 40s ease infinite",
+        fifth: "moveInCircle 20s ease infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
       },
     },
-    keyframes: {
-      shineEffect: {
-        "0%": { backgroundPosition: "0% 50%" },
-        "50%": { backgroundPosition: "100% 50%" },
-        "100%": { backgroundPosition: "0% 50%" },
-      },
-    }
   },
   plugins: [
     addVariablesForColors,

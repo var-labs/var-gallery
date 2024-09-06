@@ -57,8 +57,6 @@ export const AnimatedHoverRoundedGradient = ({
     }
   };
 
-
-
   return (
     <div
       className={cn(
