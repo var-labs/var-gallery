@@ -26,14 +26,14 @@ const Projects: React.FC = () => {
             <div className="w-full max-w-7xl mt-8 px-4 relative z-20">
               <div className="flex justify-between items-center px-2">
                 <div className="flex flex-col">
-                  <h1 className="font-semibold text-3xl mb-8">SMK Negeri 1 Purwosari</h1>
-                  <p className="font-medium text-lg mb-4">
+                  <h1 className="font-semibold text-base md:text-3xl mb-8">SMK Negeri 1 Purwosari</h1>
+                  <p className="font-medium text-xs md:text-lg mb-4">
                     Website <span className="mx-2">|</span> School
                   </p>
                 </div>
                 <div>
                   <Link legacyBehavior href={""}>
-                    <a className="border px-9 py-2 rounded-full hover:bg-gray-400">Details</a>
+                    <a className="border px-9 py-2 rounded-full sm:text-xs hover:bg-gray-400">Details</a>
                   </Link>
                 </div>
               </div>

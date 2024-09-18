@@ -45,8 +45,8 @@ const ProjectsList: React.FC = () => {
 
 
   return (
-    <div className="relative">
-    <div className="px-[9rem] py-10 mb-[19rem] grid grid-cols-2 gap-8">
+    <div className="relative md:block hidden">
+    <div className="px-[9rem] py-32 mb-[19rem] grid grid-cols-2 gap-8">
     
       {displayedProjects.map((project, index) => {
         const isLeft = index % 2 === 0;

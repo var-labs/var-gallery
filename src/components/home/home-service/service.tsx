@@ -5,9 +5,9 @@ import { BorderBeam } from "@/components/animations/magicui/border-beam";
 const Service = () => {
   return (
     <>
-      <div className="text-white px-[9rem] text-start pt-32 mb-56" id="service">
-        <p className="text-[46px] font-[500] mb-24">
-            With our services, we ensure good <br /> management, easy communication, and <br />your satisfaction.
+      <div className="text-white px-4 md:px-[9rem] text-start pt-32 mb-56 flex-col md:flex-row" id="service">
+        <p className="text-2xl md:text-[46px] md:leading-tight font-[500] mb-24">
+            With our services, we ensure good <br className="hidden md:block"/> management, easy communication, and <br className="hidden md:block"/>your satisfaction.
         </p>
 
         <div className="flex space-x-8 items-center justify-center">
@@ -26,8 +26,7 @@ const Service = () => {
 
 
           <div className="flex relative flex-col px-12 py-8 bg-[#101D1F] w-1/3">
-          
-            
+      
             <div className="flex items-center mb-4">
               <div className="bg-[#53C2D1] px-1 py-3 rounded-lg mr-4"></div>
               <h2 className="text-[20px] font-[600]">VarCretife</h2>

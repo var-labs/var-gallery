@@ -26,11 +26,11 @@ const HomeHeader = () => {
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-[#020505] [mask-image:radial-gradient(ellipse_at_center,transparent_0%,black)]"></div>
 
       <div
-        className={`text-center relative z-35 bg-clip-text text-transparent text-white leading-none ${bungee.className}`}
+        className={`text-center relative z-35 bg-clip-text text-transparent text-white leading-normal ${bungee.className}`}
       >
-        <WordFadeIn words="GROWING" globalDelay={0} className="-mt-16 mb-5 text-white" />
-        <WordFadeIn words="EVOLVING" globalDelay={0.7} className="mb-5 text-white" />
-        <div className="mb-5 flex items-center justify-center">
+        <WordFadeIn words="GROWING," globalDelay={0} className="-mt-16 md:mb-5 text-white tracking-wider" />
+        <WordFadeIn words="EVOLVING," globalDelay={0.7} className="md:mb-5 text-white tracking-wider" />
+        <div className="md:mb-5 flex items-center justify-center">
           <BoxReveal boxColor={"#548187"} duration={0.9} >
             {/* <div className="bg-[#548187] text-[96px] rounded-3xl p-2 mr-3 text-white">
               PROVING
@@ -38,16 +38,16 @@ const HomeHeader = () => {
             <WordFadeIn
               words="PROVING"
               globalDelay={0.9}
-              className="bg-[#548187] rounded-3xl p-2 mr-3 text-white"
+              className="bg-[#548187] rounded-2xl md:rounded-3xl px-2 mr-3 block  text-white"
               />
             </BoxReveal>
           <WordFadeIn words="OUR" globalDelay={1.1} className="text-white" />
         </div>
-        <WordFadeIn words="WORTH." globalDelay={1.3} className="mb-5 text-white" />
+        <WordFadeIn words="WORTH." globalDelay={1.3} className="md:mb-5 text-white" />
       </div>
 
-      <div className="absolute bottom-24 left-0 right-0 p-5 flex justify-between text-white text-[16px] font-[500] mx-[122px]">
-        <p className="w-1/2 text-left">
+      <div className="absolute bottom-24 left-0 right-0 p-5 flex justify-between text-white text-[16px] font-[500] mx-[20px] md:mx-[122px]">
+        <p className="w-full text-center max-w-sm md:max-w-full md:w-1/2 md:text-left">
           {text.map((el, i) => (
           <motion.span
             initial={{ opacity: 0 }}
@@ -58,11 +58,11 @@ const HomeHeader = () => {
             }}
             key={i}
           >
-            {el === "for" && i + 1 === 7 ?  <>{el + " "}<br/></> :  <>{el + " "}</>}
+            {el === "for" && i + 1 === 7 ? <>{el + " "}<br/></> :  <>{el + " "}</>}
           </motion.span>
         ))}
         </p>
-        <p className="w-1/2 text-right">
+        <p className="hidden md:block md:w-1/2 md:text-right">
         {leftText.map((el, i) => (
           <motion.span
             initial={{ opacity: 0 }}
