@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Link as ScrollLink, animateScroll as scroll,} from 'react-scroll';
-// import { useLoading } from '../loading/loadingContext';
 
 const functionNav = [
   { nameText: "Members", id: 'members' },
@@ -14,41 +13,8 @@ const functionNav = [
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
-  // const [iconsIndex, setIconsIndex] = useState(1);
-  // const [lastScrollY, setLastScrollY] = useState(0);
-  // const { isLoading } = useLoading();
-
-  // useEffect(() => {
-  //   const controlNavbar = () => {
-  //     if (window.scrollY > 0) {
-  //       setIconsIndex(0);
-  //     } else {
-  //       setIconsIndex(1);
-  //     }
-
-  //     setLastScrollY(window.scrollY);
-  //   };
-
-  //   window.addEventListener("scroll", controlNavbar);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", controlNavbar);
-  //   };
-  // }, [lastScrollY]);
-
-  // const scrollToTop = () => {
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // };
-
-  // if (isLoading) {
-  //   return null; 
-  // }
-
-  // const Icons = [
-  //   <ArrowUpIcon key={0} onClick={scrollToTop} />,
-  //   <Link href={'/'} key={1}><ArrowLeftIcon /></Link>,
-  // ];
-
+  // const [isOpen, setIsOpen] = useState(false);
+  
   useEffect(() => {
     if (pathname === '/' && window.location.hash) {
       const section = window.location.hash.substring(1);
@@ -68,9 +34,9 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className='fixed z-30 text-center container flex justify-center w-full'>
-        <div className='bg-[#101D1F] mt-10 text-white rounded-full max-w-full'>
-          <nav className='flex w-[623px] items-center py-2 px-[6px] gap-2'>  
+      <div className='fixed z-40 text-center container flex justify-center w-full'>
+        <div className='bg-[#101D1F] mt-10 text-white rounded-full hidden lg:block max-w-full'>
+          <nav className='flex lg:w-[623px] items-center py-2 px-[2px] lg:px-[6px] lg:gap-2'>  
 
             <Link href={'/'} className='flex items-center ml-6'>
               <Image
@@ -79,8 +45,9 @@ const Navbar: React.FC = () => {
                 width={30}
                 height={32}
               />
-              <span className='ml-3 text-[28px] font-[700]'>Var</span>
+              <span className='ml-3 text-sm lg:text-[28px] font-[700]'>Var</span>
             </Link>
+            
 
             <div className='flex flex-grow justify-center gap-4'>
               {functionNav.map((item, index) => (
@@ -109,101 +76,12 @@ const Navbar: React.FC = () => {
                 <HoverAnimation text={`Let's Talk`} />
               </Link>
             </div>
-            {/* {
-              functionNav.map((item, index) => (
-                item.id.startsWith('/') ? (
-                  <LinkHoverAnimation key={index} text={item.nameText} href={item.id} />
-                ) : (
-                  <ScrollLink
-                    key={index}
-                    to={item.id}
-                    smooth={true}
-                    duration={1000}
-                  >
-                    <LinkHoverAnimation text={item.nameText} href={`#/${item.id}`} />
-                  </ScrollLink>
-                )
-              ))
-            } */}
-            
           </nav>
         </div>
       </div>
     </>
   );
 };
-
-// type ArrowUpIconProps = {
-//   onClick: () => void;
-// };
-
-// const ArrowUpIcon: React.FC<ArrowUpIconProps> = ({ onClick }) => {
-//   const [hovered, setHovered] = useState(false);
-
-//   const handleMouseOver = () => {
-//     setHovered(true);
-//   };
-
-//   const handleMouseLeave = () => {
-//     setHovered(false);
-//   };
-
-//   return (
-//     <div className='relative group'>
-//       <button
-//         title='arrow up'
-//         type='button'
-//         className='bg-[#AAC8CD] w-[40px] h-[40px] m-1 rounded-full flex items-center justify-center'
-//         onMouseEnter={handleMouseOver}
-//         onMouseLeave={handleMouseLeave}
-//         onClick={onClick} 
-//       >
-//         <div className='absolute inset-0 flex items-center justify-center'>
-//           <Image
-//             src={arrowUp}
-//             width={20}
-//             alt='arrow-up'
-//             className={`transition-transform duration-300 transform`}
-//           />
-//         </div>
-//       </button>
-//     </div>
-//   );
-// };
-
-
-// const ArrowLeftIcon = () => {
-//   const [hovered, setHovered] = useState(false);
-
-//   const handleMouseOver = () => {
-//     setHovered(true);
-//   };
-
-//   const handleMouseLeave = () => {
-//     setHovered(false);
-//   };
-
-//   return (
-//     <div className='relative group'>
-//       <button
-//         title='arrow up'
-//         type='button'
-//         className='bg-[#AAC8CD] w-[40px] h-[40px] m-1 rounded-full flex items-center justify-center'
-//         onMouseEnter={handleMouseOver}
-//         onMouseLeave={handleMouseLeave}
-//       >
-//         <div className='absolute inset-0 flex items-center justify-center'>
-//           <Image
-//             src={arrowUp}
-//             width={20}
-//             alt='arrow-up'
-//             className={`transition-transform duration-300 transform -rotate-90`}
-//           />
-//         </div>
-//       </button>
-//     </div>
-//   );
-// };
 
 type HoverAnimationProps = {
   text: string;
@@ -236,7 +114,7 @@ const HoverAnimation: React.FC<HoverAnimationProps> = ({ text,  }) => {
       {text}
     </span>
       <span
-      className={`text-[16px] font-[500] whitespace-nowrap transition-transform duration-300 absolute top-full z-10 ${hovered ? 'transform -translate-y-[34px]' : ''}`}
+      className={`text-[16px] font-[500] whitespace-nowrap transition-transform duration-300 absolute top-full z-10 ${hovered ? 'transform -translate-y-[31px]' : ''}`}
     >
       {text}
     </span>

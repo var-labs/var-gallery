@@ -38,7 +38,7 @@ const HomeHeader = () => {
             <WordFadeIn
               words="PROVING"
               globalDelay={0.9}
-              className="bg-[#548187] rounded-2xl md:rounded-3xl px-2 mr-3 block  text-white"
+              className="bg-[#548187] rounded-2xl md:rounded-3xl px-3 md:py-4 mr-3 block text-white"
               />
             </BoxReveal>
           <WordFadeIn words="OUR" globalDelay={1.1} className="text-white" />
@@ -46,8 +46,8 @@ const HomeHeader = () => {
         <WordFadeIn words="WORTH." globalDelay={1.3} className="md:mb-5 text-white" />
       </div>
 
-      <div className="absolute bottom-24 left-0 right-0 p-5 flex justify-between text-white text-[16px] font-[500] mx-[20px] md:mx-[122px]">
-        <p className="w-full text-center max-w-sm md:max-w-full md:w-1/2 md:text-left">
+      <div className="absolute bottom-24 left-0 right-0 p-5 flex justify-between text-white text-[16px] font-[500] mx-[20px] md:mx-[60] lg:mx-[122px]">
+        <p className="w-full text-center max-w-sm lg:max-w-full lg:w-1/2 lg:text-left">
           {text.map((el, i) => (
           <motion.span
             initial={{ opacity: 0 }}
@@ -62,7 +62,7 @@ const HomeHeader = () => {
           </motion.span>
         ))}
         </p>
-        <p className="hidden md:block md:w-1/2 md:text-right">
+        <p className="hidden lg:block lg:w-1/2 lg:text-right">
         {leftText.map((el, i) => (
           <motion.span
             initial={{ opacity: 0 }}

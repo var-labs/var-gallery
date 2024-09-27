@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import Avatar from "./avatars";
 import AvatarTooltip from "./avatarTooltip";
 import SliderButton from "@/components/sliders/sliderButton";
-import TextRevealByWord from "@/components/animations/magicui/text-reveal";
-TextRevealByWord
 
 const avatarLinks = [
   {
@@ -69,7 +67,7 @@ const avatarLinks = [
   },
 ];
 
-const Members: React.FC = () => {
+const  HomeMembers: React.FC = () => {
   const [hovered, setHovered] = useState<{ name: string; role: string } | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
@@ -105,7 +103,7 @@ const Members: React.FC = () => {
     </div>
 
     <div className="flex flex-col items-center justify-center mt-[3rem] py-6">
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-x-6 gap-y-10 md:gap-x-12 md:gap-y-20 mb-10">
+      <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-x-6 gap-y-10 px-5 md:px-0 md:gap-x-12 md:gap-y-20 mb-10">
         {avatarLinks.map((link, index) => (
           <Avatar
             key={index}
@@ -114,7 +112,7 @@ const Members: React.FC = () => {
             onMouseLeave={() => setHovered(null)}
           />
         ))}
-        <div className="col-span-2 md:col-start-5 flex justify-center mt-10 text-white">
+        <div className="col-span-2 lg:col-start-3 xl:col-start-5 flex justify-center mt-10 text-white">
           <SliderButton 
             initialText="JOIN US?" 
             switchedText="APPLY NOW!" 
@@ -127,4 +125,4 @@ const Members: React.FC = () => {
   );
 };
 
-export default Members;
+export default  HomeMembers;

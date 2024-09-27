@@ -36,9 +36,10 @@ const ContactsPage: React.FC = () => {
 
   return (
     <>
-        <div className='text-[#FFF] min-h-screen flex flex-col justify-center items-center'>
+        <div className='text-[#FFF] min-h-screen flex flex-col justify-center items-center pt-14'>
             <div className={`text-center font-[400] text-[72px] leading-none ${bungee.className}`}>
-                <p className='mb-2'>Lets <span className='bg-[#548187] rounded-3xl'>hear</span> your</p>
+                <p className='mb-2'>Lets <span className='bg-[#548187
+                ] rounded-2xl md:rounded-3xl px-2'>hear</span> your</p>
                 <p>suggestions and</p>  
                 <p>wishes!</p>
             </div>
