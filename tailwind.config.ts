@@ -1,6 +1,9 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
-const svgToDataUri = require("mini-svg-data-uri");
-const colors = require("tailwindcss/colors");
+import defaultTheme from "tailwindcss/defaultTheme";
+import svgToDataUri from "mini-svg-data-uri";
+import colors from "tailwindcss/colors";
+// const defaultTheme = require("tailwindcss/defaultTheme");
+// const svgToDataUri = require("mini-svg-data-uri");
+// const colors = require("tailwindcss/colors");
 const flattenColorPalette = require("tailwindcss/lib/util/flattenColorPalette").default;
 
 module.exports = {
@@ -13,6 +16,15 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      screens : {
+        'xs': '375px', // mobile
+        'sm': '425px', //
+        'md': '576px', //
+        'lg': '768px', //tablet
+        'xl': '1024px', // 
+        '1xl': '1279.98px', //
+        '2xl': '1440px', //
+      },
       keyframes: {
         moveHorizontal: {
           "0%": {
